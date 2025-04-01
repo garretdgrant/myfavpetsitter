@@ -2,6 +2,7 @@
 import React from "react";
 import { PawPrint, Heart, Facebook, Instagram, Twitter } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -102,19 +103,21 @@ const Footer = () => {
             <p className="text-white/60 text-sm">
               © {year} My Favorite Pet Sitter. All rights reserved.
             </p>
-            <a
-              href="https://edcwebdesign.com"
+            <Link
+              href="https://www.edcwebdesign.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-4 underline hover:text-accent transition-colors"
+              className="flex items-center space-x-4 group transition-colors"
             >
               <img
                 src="https://edcwebdesign.com/assets/favicon-DCK1MxvP.svg"
                 alt="EDC Web Design Logo"
-                className="h-8 w-auto opacity-70"
+                className="h-8 w-auto"
               />
-              <p>Designed by EDC Web Design</p>
-            </a>
+              <p className="text-white font-semibold group-hover:text-yellow-400 transition-colors">
+                Designed by EDC Web Design
+              </p>
+            </Link>
           </div>
         </div>
       </div>
