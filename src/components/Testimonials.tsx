@@ -44,21 +44,21 @@ const Testimonials = () => {
   const testimonials = [
     {
       quote:
-        "Sarah is amazing with our two cats! They're normally shy with strangers, but they warmed up to her right away. We can truly relax on vacation knowing they're in great hands.",
+        "Sandy is amazing with our two cats! They're normally shy with strangers, but they warmed up to her right away. We can truly relax on vacation knowing they're in great hands.",
       name: "Emily Johnson",
       role: "Cat Owner, Folsom",
       rating: 5,
     },
     {
       quote:
-        "I'm always nervous leaving my elderly dog with anyone, but Sarah's attention to detail and genuine care put me at ease. She gave him his medication exactly as scheduled and sent updates throughout the day.",
+        "I'm always nervous leaving my elderly dog with anyone, but Sandy's attention to detail and genuine care put me at ease. She gave him his medication exactly as scheduled and sent updates throughout the day.",
       name: "Michael Rodriguez",
       role: "Dog Owner, El Dorado Hills",
       rating: 5,
     },
     {
       quote:
-        "As a first-time pet parent, I was anxious about leaving my puppy. Sarah not only took great care of him but also gave me tips that helped with his training. She's now our go-to sitter!",
+        "As a first-time pet parent, I was anxious about leaving my puppy. Sandy not only took great care of him but also gave me tips that helped with his training. She's now our go-to sitter!",
       name: "Jessica Williams",
       role: "Puppy Owner, Folsom",
       rating: 5,

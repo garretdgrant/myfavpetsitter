@@ -82,7 +82,7 @@ const About = () => {
               >
                 <img
                   src="https://scontent-sjc3-1.xx.fbcdn.net/v/t39.30808-6/448332904_10233928643936919_1790417268591473858_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=2Q8_f3OhKu0Q7kNvgGG0SPt&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&_nc_gid=r2Xudd8OA8c8BBorYvRm3g&oh=00_AYH0ce4iharlc-hgeKHmKvDZeUmVAd9TQSO3TaWJQeJMzQ&oe=67F12528"
-                  alt="Sarah with pets"
+                  alt="Sandy with pets"
                   className="w-full h-auto object-cover aspect-3/4"
                 />
               </div>
