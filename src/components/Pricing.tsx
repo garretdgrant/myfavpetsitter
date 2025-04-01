@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { PawPrint, Clock, Calendar, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";

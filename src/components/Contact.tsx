@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { PawPrint, Phone, Mail, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
