@@ -27,7 +27,7 @@ const ServiceArea = () => {
             ].map((area) => (
               <div
                 key={area}
-                className="bg-white px-4 py-2 rounded-full shadow-sm border border-pet-blue/20 flex items-center"
+                className="bg-white px-4 py-2 rounded-full shadow-xs border border-pet-blue/20 flex items-center"
               >
                 <PawPrint className="text-pet-orange h-4 w-4 mr-2" />
                 <span>{area}</span>

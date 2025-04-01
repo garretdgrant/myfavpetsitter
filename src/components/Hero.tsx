@@ -67,7 +67,7 @@ const Hero = () => {
                 <img
                   src="https://images.unsplash.com/photo-1535268647677-300dbf3d78d1"
                   alt="Happy cat with owner"
-                  className="w-full h-auto object-cover aspect-[4/3]"
+                  className="w-full h-auto object-cover aspect-4/3"
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg shadow-md animate-bounce-slow hidden md:block">

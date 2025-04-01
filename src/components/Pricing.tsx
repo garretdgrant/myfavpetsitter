@@ -103,7 +103,7 @@ const Pricing = () => {
 
         {/* Additional Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-          <Card className="border-pet-blue/20 bg-gradient-to-br from-white to-pet-blue/5">
+          <Card className="border-pet-blue/20 bg-linear-to-br from-white to-pet-blue/5">
             <CardContent className="pt-6">
               <div className="flex items-start space-x-4">
                 <div className="bg-pet-blue/10 p-2 rounded-full">
@@ -119,7 +119,7 @@ const Pricing = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-pet-orange/20 bg-gradient-to-br from-white to-pet-orange/5">
+          <Card className="border-pet-orange/20 bg-linear-to-br from-white to-pet-orange/5">
             <CardContent className="pt-6">
               <div className="flex items-start space-x-4">
                 <div className="bg-pet-orange/10 p-2 rounded-full">
