@@ -76,7 +76,7 @@ const Contact = () => {
                 <div>
                   <p className="font-medium">Email</p>
                   <p className="text-muted-foreground">
-                    hello@folsomfurryfriends.com
+                    sandy@myfavpetsitter.org
                   </p>
                 </div>
               </div>

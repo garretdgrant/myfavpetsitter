@@ -70,7 +70,7 @@ const Footer = () => {
             <h4 className="text-white font-semibold mb-4">Contact</h4>
             <div className="space-y-2 text-white/80">
               <p>(916) 555-1234</p>
-              <p>hello@folsomfurryfriends.com</p>
+              <p>sandy@myfavpetsitter.org</p>
               <p>Folsom, CA</p>
             </div>
 
@@ -98,9 +98,24 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-white/10 mt-10 pt-6 text-center">
-          <p className="text-white/60 text-sm">
-            © {year} My Favorite Pet Sitter. All rights reserved.
-          </p>
+          <div className="flex flex-col items-center space-y-2">
+            <p className="text-white/60 text-sm">
+              © {year} My Favorite Pet Sitter. All rights reserved.
+            </p>
+            <a
+              href="https://edcwebdesign.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-4 underline hover:text-accent transition-colors"
+            >
+              <img
+                src="https://edcwebdesign.com/assets/favicon-DCK1MxvP.svg"
+                alt="EDC Web Design Logo"
+                className="h-8 w-auto opacity-70"
+              />
+              <p>Designed by EDC Web Design</p>
+            </a>
+          </div>
         </div>
       </div>
     </footer>
