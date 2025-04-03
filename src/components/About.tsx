@@ -1,5 +1,5 @@
 import React from "react";
-import { PawPrint, Heart, Home, Shield } from "lucide-react";
+import { PawPrint, Heart, Home, Shield, Award } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -34,25 +34,30 @@ const About = () => {
         <h2 className="section-heading mb-16 pb-3">About the Sitter</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Left Column */}
           <div className="order-2 md:order-1">
             <div className="space-y-6">
               <h3 className="text-3xl font-semibold text-pet-blue">
-                Hi, I&apos;m Sandy
+                Meet Sandy Zaboukos
               </h3>
               <p className="text-lg text-muted-foreground">
-                A Folsom native with over 8 years of experience caring for pets
-                of all kinds. My mission is to provide the highest quality care
-                for your furry family members when you can&apos;t be there.
-              </p>
-              <p className="text-muted-foreground">
-                As a lifelong animal lover and pet owner myself, I understand
-                the importance of finding someone trustworthy to care for your
-                pets. I treat each animal as if they were my own, with
-                individualized attention, plenty of exercise, and lots of
-                affection.
+                Sandy Zaboukos has over 18 years experience as a professional
+                pet sitter. She began working for My Favorite Pet Sitter in 2007
+                and took over the business in 2011. Sandy has always had pets of
+                her own, mostly dogs and cats, but has also had hamsters, guinea
+                pigs, rats, and even a chinchilla. Sandy has also worked in cat
+                rescue since 2017 and is well known in the city of Folsom for
+                her volunteer work in TNR and feral cats. She received the
+                Folsom Spirit Award in 2024, where she was recognized by the
+                city for her cat rescue work in the community.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+                <AboutFeature
+                  icon={Award}
+                  title="Folsom Spirit Award"
+                  description="Recognized by the Folsom City Council for outstanding service and dedication to improving the community."
+                />
                 <AboutFeature
                   icon={Heart}
                   title="Passionate"
@@ -72,6 +77,7 @@ const About = () => {
             </div>
           </div>
 
+          {/* Right Column */}
           <div className="order-1 md:order-2">
             <div className="relative">
               <div
