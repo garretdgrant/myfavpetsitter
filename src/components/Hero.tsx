@@ -66,7 +66,7 @@ const Hero = () => {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-xl transform transition-transform hover:scale-[1.01] duration-500">
                 <img
-                  src="https://images.unsplash.com/photo-1535268647677-300dbf3d78d1"
+                  src="/cats/cat6.jpeg"
                   alt="Happy cat with owner"
                   className="w-full h-auto object-cover aspect-4/3"
                 />
