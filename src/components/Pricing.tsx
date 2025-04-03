@@ -24,10 +24,10 @@ const Pricing = () => {
   };
 
   const pricingItems = [
-    { duration: "20-minute visit", price: "$20.00" },
-    { duration: "30-minute visit", price: "$25.00" },
-    { duration: "45-minute visit", price: "$30.00" },
-    { duration: "60-minute visit", price: "$35.00" },
+    { duration: "20-minute visit", price: "$25.00" },
+    { duration: "30-minute visit", price: "$30.00" },
+    { duration: "45-minute visit", price: "$35.00" },
+    { duration: "60-minute visit", price: "$45.00" },
   ];
 
   return (
