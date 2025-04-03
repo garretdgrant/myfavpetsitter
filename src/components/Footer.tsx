@@ -70,7 +70,7 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-semibold mb-4">Contact</h4>
             <div className="space-y-2 text-white/80">
-              <p>(916) 555-1234</p>
+              <p>(916) 990-3911</p>
               <p>sandy@myfavpetsitter.org</p>
               <p>Folsom, CA</p>
             </div>
