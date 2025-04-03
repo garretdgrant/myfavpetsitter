@@ -110,7 +110,7 @@ const Footer = () => {
               className="flex items-center space-x-4 group transition-colors"
             >
               <img
-                src="https://edcwebdesign.com/assets/favicon-DCK1MxvP.svg"
+                src="/edcLogo.webp"
                 alt="EDC Web Design Logo"
                 className="h-8 w-auto"
               />
