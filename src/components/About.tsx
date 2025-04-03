@@ -71,7 +71,7 @@ const About = () => {
                 <AboutFeature
                   icon={Home}
                   title="Local"
-                  description="Proudly serving the Folsom community since 2015"
+                  description="Proudly serving the Folsom community since 2007"
                 />
               </div>
             </div>
