@@ -32,7 +32,6 @@ const Footer = () => {
 
             <p className="text-white/80 mb-6">
               Professional pet sitting and dog walking services in Folsom, CA
-              and surrounding areas.
             </p>
 
             <div className="flex items-center">

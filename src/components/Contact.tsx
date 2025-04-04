@@ -87,9 +87,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="font-medium">Service Area</p>
-                  <p className="text-muted-foreground">
-                    Folsom, El Dorado Hills, and surrounding areas
-                  </p>
+                  <p className="text-muted-foreground">Folsom</p>
                 </div>
               </div>
             </div>

@@ -12,18 +12,16 @@ const ServiceArea = () => {
 
           <h2 className="text-3xl font-bold mb-6">Service Area</h2>
 
-          <p className="text-xl text-center mb-8">
-            Proudly serving Folsom, El Dorado Hills, and nearby areas.
-          </p>
+          <p className="text-xl text-center mb-8">Proudly serving Folsom</p>
 
           <div className="flex flex-wrap justify-center gap-4">
             {[
               "Folsom",
-              "El Dorado Hills",
-              "Granite Bay",
-              "Cameron Park",
-              "Fair Oaks",
-              "Orangevale",
+              // "El Dorado Hills",
+              // "Granite Bay",
+              // "Cameron Park",
+              // "Fair Oaks",
+              // "Orangevale",
             ].map((area) => (
               <div
                 key={area}
