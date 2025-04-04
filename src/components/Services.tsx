@@ -8,6 +8,7 @@ import {
   Pill,
   Home,
   Coffee,
+  Scissors,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -50,7 +51,7 @@ const Services = () => {
     {
       title: "Pet Sitting",
       description:
-        "In-home pet sitting while you&apos;re away, including feeding, playtime, and plenty of love.",
+        "In-home pet sitting while you're away, including feeding, playtime, and plenty of love.",
       icon: Home,
       color: "blue",
     },
@@ -83,10 +84,10 @@ const Services = () => {
       color: "blue",
     },
     {
-      title: "Overnight Stays",
+      title: "Nail Trimming",
       description:
-        "Extended care with overnight stays to provide company and security for your pets.",
-      icon: Coffee,
+        "Gentle, stress-free nail trimming to keep your pets comfortable and healthy.",
+      icon: Scissors,
       color: "orange",
     },
   ];
