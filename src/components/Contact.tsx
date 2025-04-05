@@ -23,26 +23,48 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    console.log(formData);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+      if (res.ok) {
+        toast({
+          title: "Message sent!",
+          description: "We’ll get back to you as soon as possible.",
+        });
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      } else {
+        const data = await res.json();
+        toast({
+          title: "Oops!",
+          description: data?.error || "Something went wrong. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
       toast({
-        title: "Message sent!",
-        description: "We&apos;ll get back to you as soon as possible.",
+        title: "Server error",
+        description:
+          "There was a problem submitting your message. Please try again later.",
+        variant: "destructive",
       });
-
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
-    }, 1000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -135,6 +157,14 @@ const Contact = () => {
                     className="w-full"
                   />
                 </div>
+
+                <input
+                  type="text"
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  style={{ position: "absolute", left: "-10000px" }}
+                />
 
                 <div>
                   <label htmlFor="phone" className="block mb-2 font-medium">

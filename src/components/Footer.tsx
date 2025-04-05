@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import { PawPrint, Heart, Facebook, Instagram, Twitter } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { PawPrint, Heart } from "lucide-react";
 import Link from "next/link";
 
 const Footer = () => {
@@ -72,27 +71,6 @@ const Footer = () => {
               <p>(916) 990-3911</p>
               <p>sandy@myfavpetsitter.org</p>
               <p>Folsom, CA</p>
-            </div>
-
-            <div className="flex mt-4 space-x-3">
-              {[
-                { icon: Facebook, href: "#" },
-                { icon: Instagram, href: "#" },
-                { icon: Twitter, href: "#" },
-              ].map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  className={cn(
-                    "bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors",
-                    "flex items-center justify-center",
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <social.icon className="text-white h-4 w-4" size={16} />
-                </a>
-              ))}
             </div>
           </div>
         </div>
