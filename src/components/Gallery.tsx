@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { PawPrint, X } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface GalleryImage {
   url: string;
@@ -19,6 +20,10 @@ const Gallery = () => {
       alt: "Fluffy dog enjoying outdoor time",
     },
     {
+      url: "/dogs/dog3.jpeg",
+      alt: "Beautiful dog portrait",
+    },
+    {
       url: "/cats/cat2.jpeg",
       alt: "Cute kitten",
     },
@@ -27,12 +32,20 @@ const Gallery = () => {
       alt: "Beautiful dog portrait",
     },
     {
+      url: "/dogs/dog1.jpeg",
+      alt: "Fluffy dog enjoying outdoor time",
+    },
+    {
       url: "/cats/cat7.jpeg",
       alt: "Playful cat",
     },
     {
       url: "/cats/cat8.jpeg",
       alt: "Energetic puppy",
+    },
+    {
+      url: "/dogs/dog2.jpeg",
+      alt: "Cute kitten",
     },
     {
       url: "/cats/cat9.jpeg",
@@ -59,13 +72,19 @@ const Gallery = () => {
               )}
               onClick={() => setSelectedImage(image)}
             >
-              <img
-                src={image.url}
-                alt={image.alt}
-                className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+              {/* Image container with fixed height for `fill` to work */}
+              <div className="relative w-full h-64">
+                <Image
+                  src={image.url}
+                  alt={image.alt}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-xl"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
 
-              <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+              {/* Caption overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                 <p className="text-white font-medium text-sm">
                   {image.caption}
                 </p>
