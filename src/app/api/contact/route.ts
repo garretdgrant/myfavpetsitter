@@ -4,6 +4,27 @@ import { format } from "date-fns";
 import { isSpamHoneypot } from "@/lib/spam";
 import { isValidEmail, isValidPhone } from "@/lib/validations";
 
+const PST_TIME_ZONE = "America/Los_Angeles";
+
+const parseDateOnly = (value: string) => {
+  if (!value) return null;
+  const [year, month, day] = value.split("-").map(Number);
+  if ([year, month, day].some((num) => Number.isNaN(num))) {
+    return null;
+  }
+  return new Date(Date.UTC(year, month - 1, day));
+};
+
+const getTodayInPstDate = () => {
+  const todayString = new Intl.DateTimeFormat("en-CA", {
+    timeZone: PST_TIME_ZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+  return parseDateOnly(todayString)!;
+};
+
 export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   try {
@@ -78,11 +99,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const startDate = new Date(serviceStart);
-    const endDate = new Date(serviceEnd);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
+    const startDate = parseDateOnly(serviceStart);
+    const endDate = parseDateOnly(serviceEnd);
+    if (!startDate || !endDate) {
       return new Response(
         JSON.stringify({
           success: false,
@@ -92,7 +111,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (startDate < today) {
+    const todayPst = getTodayInPstDate();
+
+    if (startDate < todayPst) {
       return new Response(
         JSON.stringify({
           success: false,
