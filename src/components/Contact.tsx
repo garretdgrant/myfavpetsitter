@@ -6,6 +6,25 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 
+const PST_TIME_ZONE = "America/Los_Angeles";
+
+const getTodayInPstString = () =>
+  new Intl.DateTimeFormat("en-CA", {
+    timeZone: PST_TIME_ZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+
+const parseDateOnly = (value: string) => {
+  if (!value) return null;
+  const [year, month, day] = value.split("-").map(Number);
+  if ([year, month, day].some((num) => Number.isNaN(num))) {
+    return null;
+  }
+  return new Date(Date.UTC(year, month - 1, day));
+};
+
 const Contact = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -20,7 +39,7 @@ const Contact = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const today = new Date().toISOString().split("T")[0];
+  const todayPstString = getTodayInPstString();
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -33,10 +52,10 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const startDate = new Date(formData.serviceStart);
-    const endDate = new Date(formData.serviceEnd);
+    const startDate = parseDateOnly(formData.serviceStart);
+    const endDate = parseDateOnly(formData.serviceEnd);
 
-    if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
+    if (!startDate || !endDate) {
       toast({
         title: "Invalid dates",
         description: "Please provide valid start and end dates.",
@@ -45,9 +64,8 @@ const Contact = () => {
       return;
     }
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (startDate < today) {
+    const todayPst = parseDateOnly(todayPstString)!;
+    if (startDate < todayPst) {
       toast({
         title: "Start date in the past",
         description: "Please pick a start date that is today or later.",
@@ -253,13 +271,13 @@ const Contact = () => {
                   <Input
                     id="serviceStart"
                     name="serviceStart"
-                    type="date"
-                    value={formData.serviceStart}
-                    onChange={handleChange}
-                    required
-                    min={today}
-                    className="w-full"
-                  />
+                  type="date"
+                  value={formData.serviceStart}
+                  onChange={handleChange}
+                  required
+                  min={todayPstString}
+                  className="w-full"
+                />
                 </div>
                 <div>
                   <label
@@ -271,13 +289,13 @@ const Contact = () => {
                   <Input
                     id="serviceEnd"
                     name="serviceEnd"
-                    type="date"
-                    value={formData.serviceEnd}
-                    onChange={handleChange}
-                    required
-                    min={formData.serviceStart || today}
-                    className="w-full"
-                  />
+                  type="date"
+                  value={formData.serviceEnd}
+                  onChange={handleChange}
+                  required
+                  min={formData.serviceStart || todayPstString}
+                  className="w-full"
+                />
                 </div>
               </div>
 
