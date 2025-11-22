@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { NextRequest } from "next/server";
+import { format } from "date-fns";
 import { isSpamHoneypot } from "@/lib/spam";
 import { isValidEmail, isValidPhone } from "@/lib/validations";
 
@@ -7,7 +8,18 @@ export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const body = await req.json();
-    const { name, email, phone, message, company } = body;
+    const {
+      name,
+      email,
+      phone,
+      message,
+      company,
+      address,
+      serviceStart,
+      serviceEnd,
+      visitsPerDay,
+      visitTime,
+    } = body;
     console.log("Received form submission:", body);
 
     // 🛡️ Honeypot spam check
@@ -19,7 +31,17 @@ export async function POST(req: NextRequest) {
     }
 
     // Basic required field validation
-    if (!name || !email || !message || !phone) {
+    if (
+      !name ||
+      !email ||
+      !message ||
+      !phone ||
+      !address ||
+      !serviceStart ||
+      !serviceEnd ||
+      !visitsPerDay ||
+      !visitTime
+    ) {
       return new Response(
         JSON.stringify({ success: false, error: "Missing required fields." }),
         { status: 400 },
@@ -41,9 +63,64 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const visitsNumber = Number(visitsPerDay);
+    if (
+      !Number.isFinite(visitsNumber) ||
+      visitsNumber < 1 ||
+      visitsNumber > 6
+    ) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Visits per day must be between 1 and 6.",
+        }),
+        { status: 400 },
+      );
+    }
+
+    const startDate = new Date(serviceStart);
+    const endDate = new Date(serviceEnd);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Invalid service dates provided.",
+        }),
+        { status: 400 },
+      );
+    }
+
+    if (startDate < today) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Service start date cannot be in the past.",
+        }),
+        { status: 400 },
+      );
+    }
+
+    if (startDate > endDate) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Service end date cannot be before the start date.",
+        }),
+        { status: 400 },
+      );
+    }
+
+    const formattedStartDate = format(startDate, "MM-dd-yyyy");
+    const formattedEndDate = format(endDate, "MM-dd-yyyy");
+
+    const recipientEmail =
+      process.env.DEV_EMAIL?.trim() || "szaboukos@gmail.com";
+
     const { data, error } = await resend.emails.send({
       from: "leads@edcwebdesign.com",
-      to: "szaboukos@gmail.com",
+      to: recipientEmail,
       subject: `🚨 NEW PETSITTING LEAD: Message from ${name} via Website Contact Form`,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; color: #333;">
@@ -60,6 +137,22 @@ export async function POST(req: NextRequest) {
             <tr>
               <td style="padding: 8px; font-weight: bold;">Phone:</td>
               <td style="padding: 8px;">${phone}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">Address:</td>
+              <td style="padding: 8px;">${address}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">Service Dates:</td>
+              <td style="padding: 8px;">${formattedStartDate} to ${formattedEndDate}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">Visits/Day:</td>
+              <td style="padding: 8px;">${visitsNumber}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; font-weight: bold;">Preferred Time:</td>
+              <td style="padding: 8px;">${visitTime}</td>
             </tr>
           </table>
           <div style="margin-top: 20px;">

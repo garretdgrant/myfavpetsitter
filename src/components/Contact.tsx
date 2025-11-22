@@ -12,12 +12,20 @@ const Contact = () => {
     name: "",
     email: "",
     phone: "",
+    address: "",
+    serviceStart: "",
+    serviceEnd: "",
+    visitsPerDay: "",
+    visitTime: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const today = new Date().toISOString().split("T")[0];
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -25,6 +33,38 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const startDate = new Date(formData.serviceStart);
+    const endDate = new Date(formData.serviceEnd);
+
+    if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
+      toast({
+        title: "Invalid dates",
+        description: "Please provide valid start and end dates.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (startDate < today) {
+      toast({
+        title: "Start date in the past",
+        description: "Please pick a start date that is today or later.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (startDate > endDate) {
+      toast({
+        title: "Invalid date range",
+        description: "End date cannot be before the start date.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     console.log(formData);
     try {
@@ -44,6 +84,11 @@ const Contact = () => {
           name: "",
           email: "",
           phone: "",
+          address: "",
+          serviceStart: "",
+          serviceEnd: "",
+          visitsPerDay: "",
+          visitTime: "",
           message: "",
         });
       } else {
@@ -176,8 +221,108 @@ const Contact = () => {
                     type="tel"
                     value={formData.phone}
                     onChange={handleChange}
+                    required
                     className="w-full"
                   />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="address" className="block mb-2 font-medium">
+                  Service Address
+                </label>
+                <Input
+                  id="address"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  required
+                  className="w-full"
+                  placeholder="123 Pet Lane, Folsom, CA"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    htmlFor="serviceStart"
+                    className="block mb-2 font-medium"
+                  >
+                    Service Start Date
+                  </label>
+                  <Input
+                    id="serviceStart"
+                    name="serviceStart"
+                    type="date"
+                    value={formData.serviceStart}
+                    onChange={handleChange}
+                    required
+                    min={today}
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="serviceEnd"
+                    className="block mb-2 font-medium"
+                  >
+                    Service End Date
+                  </label>
+                  <Input
+                    id="serviceEnd"
+                    name="serviceEnd"
+                    type="date"
+                    value={formData.serviceEnd}
+                    onChange={handleChange}
+                    required
+                    min={formData.serviceStart || today}
+                    className="w-full"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    htmlFor="visitsPerDay"
+                    className="block mb-2 font-medium"
+                  >
+                    Visits Per Day
+                  </label>
+                  <Input
+                    id="visitsPerDay"
+                    name="visitsPerDay"
+                    type="number"
+                    min={1}
+                    max={6}
+                    value={formData.visitsPerDay}
+                    onChange={handleChange}
+                    required
+                    className="w-full"
+                    placeholder="2"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="visitTime" className="block mb-2 font-medium">
+                    Preferred Visit Time
+                  </label>
+                  <select
+                    id="visitTime"
+                    name="visitTime"
+                    value={formData.visitTime}
+                    onChange={handleChange}
+                    required
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  >
+                    <option value="" disabled>
+                      Select a time
+                    </option>
+                    <option value="Morning">Morning (7-10 AM)</option>
+                    <option value="Midday">Midday (11 AM-2 PM)</option>
+                    <option value="Afternoon">Afternoon (3-6 PM)</option>
+                    <option value="Evening">Evening (After 6 PM)</option>
+                    <option value="Overnight">Overnight</option>
+                  </select>
                 </div>
               </div>
 
